@@ -1,0 +1,28 @@
+language: python
+sudo: false
+cache:
+  directories:
+  - "$HOME/.cache/pip"
+install:
+- pip install tox coveralls
+script:
+- tox
+env:
+- TOXENV=py26
+- TOXENV=py27
+- TOXENV=py32
+- TOXENV=py33
+- TOXENV=py32
+- TOXENV=pypy
+- TOXENV=pypy3
+after_success: coveralls
+notifications:
+  irc: irc.freenode.org#oauthlib
+deploy:
+  provider: pypi
+  user: ib.lundgren
+  password:
+    secure: PGZF9pRiTGCSwQjk1ddTKF3x4rQ0iAiPbg2uSixyO68uMXRgJjwHhSrNM0OEqtK5YWU5FE5L0DwR1nkrpEJKO4a5q2EOgos+gVoKpJfinoUNOOkjc1VHpqKM0uRf/OKrw1alvWUwqvW8B+DOb9TY5c5VZxQuRL+iwdrtwzFlKls=
+  on:
+    tags: true
+    repo: idan/oauthlib
